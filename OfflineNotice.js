@@ -25,7 +25,9 @@ class OfflineNotice extends PureComponent {
   }
 
   handleConnectivityChange = isConnected => {
+    console.log(isConnected)
     if (isConnected) {
+
       this.setState({ isConnected });
     } else {
       this.setState({ isConnected });
@@ -34,22 +36,32 @@ class OfflineNotice extends PureComponent {
 
   render() {
     if (!this.state.isConnected) {
-      return <MiniOfflineSign />;
+      return (
+          <View style={styles.offlineContainer}>
+           <Text style={styles.offlineText}>No Internet Connection</Text>
+          </View>
+         );
+    }else{
+       return (
+         <View style={[styles.offlineContainer, {backgroundColor:'green'}]}>
+          <Text style={[styles.offlineText,{color:'white'}]}>Internet Connection Is Availiable</Text>
+         </View>
+         );
+
     }
-    return null;
   }
 }
 
 const styles = StyleSheet.create({
   offlineContainer: {
     backgroundColor: '#b52424',
-    height: 30,
+    height: 35,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
     width,
     position: 'absolute',
-    top: 30
+    top: 1 //30
   },
   offlineText: { color: '#fff' }
 });
